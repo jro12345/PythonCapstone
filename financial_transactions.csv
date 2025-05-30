@@ -1,0 +1,21 @@
+transaction_id,date,customer_id,amount,type,description
+1,2015-08-01,459,2406736.87,transfer,Customer 459 logged a transfer for 2406736.87.
+2,2003-10-29,339,891936.83,transfer,Customer 339 logged a transfer for 891936.83.
+3,2012-11-21,738,8580984.01,transfer,Customer 738 logged a transfer for 8580984.01.
+4,2002-02-03,149,9851012.58,transfer,Customer 149 logged a transfer for 9851012.58.
+5,2019-12-07,734,9588801.39,credit,Customer 734 logged a credit for 9588801.39.
+6,2021-04-13,408,1268561.43,credit,Customer 408 logged a credit for 1268561.43.
+7,2020-04-04,880,6219603.38,debit,Customer 880 logged a debit for 6219603.38.
+8,1998-09-14,182,6712125.85,credit,Customer 182 logged a credit for 6712125.85.
+9,2025-02-03,968,2919411.10,transfer,Customer 968 logged a transfer for 2919411.1.
+10,2017-01-03,208,4001869.43,transfer,Customer 208 logged a transfer for 4001869.43.
+11,2022-09-02,984,3755372.98,debit,Customer 984 logged a debit for 3755372.98.
+12,2004-02-21,815,5734426.76,debit,Customer 815 logged a debit for 5734426.76.
+13,2025-02-14,53,8586241.00,credit,Customer 53 logged a credit for 8586241.0.
+14,2007-12-06,875,7312146.26,transfer,Customer 875 logged a transfer for 7312146.26.
+15,2023-09-26,362,4540685.61,debit,Customer 362 logged a debit for 4540685.61.
+16,2012-01-30,263,987023.89,transfer,Customer 263 logged a transfer for 987023.89.
+17,2012-03-22,684,500452.74,debit,Customer 684 logged a debit for 500452.74.
+18,2004-10-25,799,4951060.79,transfer,Customer 799 logged a transfer for 4951060.79.
+19,1997-04-30,296,4124367.69,credit,Customer 296 logged a credit for 4124367.69.
+20,2008-08-15,362,2020033.65,debit,Customer 362 logged a debit for 2020033.65.
