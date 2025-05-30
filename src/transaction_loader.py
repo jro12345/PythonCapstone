@@ -1,6 +1,15 @@
 import csv
 from src.utils.validation_utility import *
 
+def log_error(message: str, log_file: str = 'error_log.txt') -> None:
+    try:
+        with open(log_file, 'a', encoding='utf-8') as error_file:
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            error_file.write(f"{timestamp} - ERROR - {message}\n")
+            print(message)
+    except Exception as e:
+        print(f"Failed to write to {log_file}: {e}")
+        
 def load_transactions(filename: str='financial_transactions.csv') -> list[dict[str, any]]:
     """
     Reads from csv (filename).
@@ -57,13 +66,13 @@ def load_transactions(filename: str='financial_transactions.csv') -> list[dict[s
                     transaction_ids.append(transaction_id)
                 # Skip invalid rows
                 except ValueError as e:
-                    print(f"Skipping invalid row:\n{line}\n{e}")
+                    log_error(f"Skipping invalid row:\n{line}{e}")
         if len(transactions) != 0:
             print(f"\n{transaction_counter} transactions loaded!")
         else:
             print("\nFile loaded but transactions list is empty!")
         return transactions
     except FileNotFoundError:
-        print(f"\n{filename} was not found. Please upload file and try again.\n")
+        log_error(f"\n{filename} was not found. Please upload file and try again.\n")
     except Exception as e:
-        print(f"\nSomething went wrong with loading file, {e}\n")
+        log_error(f"\nSomething went wrong with loading file, {e}\n")

@@ -1,0 +1,57 @@
+FINANCIAL ANALYSIS REPORT
+Report contains dates from 1997-04-30 to 2025-02-14
+****************************************
+Financial Summary:
+Total Credits: $30280097.36
+Total Debits: $4124367.69
+Total Transfers: $39495444.89
+Net Balance: $26155729.67
+By type:
+  Credit: $30280097.36
+  Debit: $4124367.69
+  Transfer: $39495444.89
+****************************************
+Percentage of total by type:
+The overall total for transactions is $73899909.94
+Total debits are $4124367.69, which makes up 5.58% of total transactions
+Total credits are $30280097.36, which make up 40.97% of total transactions
+Total Transfers are $39495444.89, which make up 53.44% of total transactions
+****************************************
+Customers with highest transactions
+Highest debit was Customer Id 296: $4124367.69
+Highest credit was Customer Id 734: $9588801.39
+Highest transfer was Customer Id 149: $9851012.58
+****************************************
+Transaction totals by customer:
+Customer Totals:
+Customer ID: 53: $8586241.00
+Customer ID: 149: $9851012.58
+Customer ID: 182: $6712125.85
+Customer ID: 208: $4001869.43
+Customer ID: 263: $987023.89
+Customer ID: 296: $0.00
+Customer ID: 339: $891936.83
+Customer ID: 408: $1268561.43
+Customer ID: 734: $9588801.39
+Customer ID: 738: $8580984.01
+Customer ID: 799: $4951060.79
+Customer ID: 875: $7312146.26
+Customer ID: 968: $2919411.10
+****************************************
+Transactions sorted by date:
+ ID  | Date        | Customer  | Amount       | Type      | Description                                     
+------------------------------------------------------------------------------------------------------------
+ 19  | 1997-04-30  | 296       | 4124367.69   | credit    | Customer 296 logged a credit for 4124367.69.    
+ 20  | 1997-04-30  | 296       | -4124367.69  | debit     | Customer 296 logged a credit for 4124367.69.    
+ 8   | 1998-09-14  | 182       | 6712125.85   | credit    | Customer 182 logged a credit for 6712125.85.    
+ 4   | 2002-02-03  | 149       | 9851012.58   | transfer  | Customer 149 logged a transfer for 9851012.58.  
+ 2   | 2003-10-29  | 339       | 891936.83    | transfer  | Customer 339 logged a transfer for 891936.83.   
+ 18  | 2004-10-25  | 799       | 4951060.79   | transfer  | Customer 799 logged a transfer for 4951060.79.  
+ 14  | 2007-12-06  | 875       | 7312146.26   | transfer  | Customer 875 logged a transfer for 7312146.26.  
+ 16  | 2012-01-30  | 263       | 987023.89    | transfer  | Customer 263 logged a transfer for 987023.89.   
+ 3   | 2012-11-21  | 738       | 8580984.01   | transfer  | Customer 738 logged a transfer for 8580984.01.  
+ 10  | 2017-01-03  | 208       | 4001869.43   | transfer  | Customer 208 logged a transfer for 4001869.43.  
+ 5   | 2019-12-07  | 734       | 9588801.39   | credit    | Customer 734 logged a credit for 9588801.39.    
+ 6   | 2021-04-13  | 408       | 1268561.43   | credit    | Customer 408 logged a credit for 1268561.43.    
+ 9   | 2025-02-03  | 968       | 2919411.10   | transfer  | Customer 968 logged a transfer for 2919411.1.   
+ 13  | 2025-02-14  | 53        | 8586241.00   | credit    | Customer 53 logged a credit for 8586241.0.      

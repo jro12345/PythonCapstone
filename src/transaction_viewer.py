@@ -55,6 +55,8 @@ def view_transactions_by_type(transactions: list[dict[str, any]]) -> None:
                 raise ValueError(f"\nType can only be 'debit', 'credit', or 'transfer', you chose {type_to_view}\n")
             # Filter transactions
             filtered_transactions = [txn for txn in transactions if txn['type'] == type_to_view]
+            if not filtered_transactions:
+                raise ValueError(f"\nThere were no {type_to_view} transactions in this file\n")
             # Print table in formatted view
             print('\n', format_transactions_table(filtered_transactions))
             break

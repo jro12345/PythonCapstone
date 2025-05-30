@@ -1,0 +1,36 @@
+2025-05-30 12:37:35 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:38:13 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:42:30 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:44:21 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:44:59 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:46:07 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:46:36 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
+2025-05-30 12:46:36 - ERROR - Skipping invalid row:
+{'transaction_id': '19', 'date': '1997-04-30', 'customer_id': '296', 'amount': '4124367.69', 'type': 'debit', 'description': 'Customer 296 logged a credit for 4124367.69.'}
+You can not have duplicate transaction ids. 19 is in list [2, 3, 4, 5, 6, 8, 9, 10, 13, 14, 16, 18, 19] already
+
+2025-05-30 12:47:16 - ERROR - Skipping invalid row:
+{'transaction_id': 'a', 'date': '2015-08-01', 'customer_id': '459', 'amount': '2406736.87', 'type': 'transfer', 'description': 'Customer 459 logged a transfer for 2406736.87.'}
+Invalid transaction id a: transaction Id must be a positive integer.
+
