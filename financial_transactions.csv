@@ -1,5 +1,4 @@
 transaction_id,date,customer_id,amount,type,description
-a,2015-08-01,459,2406736.87,transfer,Customer 459 logged a transfer for 2406736.87.
 2,2003-10-29,339,891936.83,transfer,Customer 339 logged a transfer for 891936.83.
 3,2012-11-21,738,8580984.01,transfer,Customer 738 logged a transfer for 8580984.01.
 4,2002-02-03,149,9851012.58,transfer,Customer 149 logged a transfer for 9851012.58.
@@ -13,4 +12,3 @@ a,2015-08-01,459,2406736.87,transfer,Customer 459 logged a transfer for 2406736.
 16,2012-01-30,263,987023.89,transfer,Customer 263 logged a transfer for 987023.89.
 18,2004-10-25,799,4951060.79,transfer,Customer 799 logged a transfer for 4951060.79.
 19,1997-04-30,296,4124367.69,credit,Customer 296 logged a credit for 4124367.69.
-

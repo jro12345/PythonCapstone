@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from src.transaction_viewer import format_transactions_table
 from src.utils.helpers import cleanup_old_files
+from src.utils.validation_utility import get_valid_input, validate_yes_no, CancelInput
 
 def get_sums_by_type(transactions: list[dict[str, any]]) -> dict:
     """
@@ -25,24 +26,23 @@ def analyze_transactions_by_year(transactions: list[dict[str, any]]) -> list[dic
     If no, return orginal transaction list.
     If yes, return only transactions for the specified year.
     """
-    while True:
-        specify_year = input("Do you want to analyze transactions for a specific year (yes/no?: ").strip().lower()
-        if specify_year not in ['yes', 'no']:
-            print("\nAnser must be 'yes' or 'no'\n")
-        else:
-            if specify_year == "no":
-                return transactions
+    print("Enter 'c' at any step to cancel and go back to main menu")
+    specify_year = get_valid_input("Do you want to analyze transactions for a specific year (yes/no?: ", validate_yes_no)
+    if specify_year == "no":
+        return transactions
+    else:
+        # Get list of all years in transactions
+        valid_years = {int(datetime.strftime(txn['date'], "%Y")) for txn in transactions}
+        while True:                  
+            year_input = input(f"Which year would you like to analyze?:\nValid years are {sorted(valid_years)}: ").strip()
+            if year_input == 'c':
+                raise CancelInput
+            # Validate year input against available years in transactions
+            elif year_input not in [str(year) for year in valid_years]:
+                print(f"\nYou must select a valid year from {sorted(valid_years)}\n")
             else:
-                # Get list of all years in transactions
-                valid_years = {int(datetime.strftime(txn['date'], "%Y")) for txn in transactions}
-                while True:                  
-                    year_input = input(f"Which year would you like to analyze?:\nValid years are ({sorted(valid_years)})\n").strip()
-                    # Validate year input against available years in transactions
-                    if year_input not in [str(year) for year in valid_years]:
-                        print(f"\nYou must select a valid year from {sorted(valid_years)}\n")
-                    else:
-                        # Return only transactions for the year specified
-                        return [txn for txn in transactions if txn['date'].year == int(year_input)]
+                # Return only transactions for the year specified
+                return [txn for txn in transactions if txn['date'].year == int(year_input)]
                 
 def create_report_statement(transactions: list[dict[str, any]]) -> str:
     """ Creates a string statements formatted with totals based on transaction type """
@@ -163,14 +163,17 @@ def analyze_finances(transactions: list[dict[str, any]], filename: str = 'analys
     Prints a string formatted with totals based on transaction type.
     Writes analysis to file.
     """
-    transactions_by_year = analyze_transactions_by_year(transactions)
-    analysis = create_report_statement(transactions_by_year)
-    print(analysis)
     try:
-        with open(filename, 'w', encoding='utf-8') as analysis_file:
-            analysis_file.write(analysis)
-    except Exception as e:
-        print(f"\nThere was a problem generating your analysis file, {e}\n")
+        transactions_by_year = analyze_transactions_by_year(transactions)
+        analysis = create_report_statement(transactions_by_year)
+        print(analysis)
+        try:
+            with open(filename, 'w', encoding='utf-8') as analysis_file:
+                analysis_file.write(analysis)
+        except Exception as e:
+            print(f"\nThere was a problem generating your analysis file, {e}\n")
+    except CancelInput as e:
+        print(e)
 
 def generate_report(transactions: list[dict[str, any]], filename: str ='report.txt') -> None:
     """ Creates a new file containing transaction totals based on type. """

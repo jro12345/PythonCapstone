@@ -15,7 +15,7 @@ def main():
     try:
         while True:
             print("\nSmart Personal Finance Analyzer")
-            print("0. Generate test transactions")
+            print("0. Generate Test Transactions")
             print("1. Load Transactions")
             print("2. Add Transaction")
             print("3. View Transactions")
