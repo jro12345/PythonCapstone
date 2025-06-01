@@ -29,7 +29,7 @@ def main():
             print()
             # Call functions based on choice
             if choice == '0':
-                transactions = generate_test_transactions()
+                transactions = generate_test_transactions(transactions)
             elif choice == '1':
                 transactions = load_transactions()
             elif choice == '2':
@@ -53,7 +53,6 @@ def main():
                 if validate_transactions_loaded(transactions):
                     generate_report(transactions)
             elif choice == '9':
-               # print("\n")
                 print("\nExiting program\n")
                 break
             else:

@@ -1,29 +1,26 @@
 from random import *
-from datetime import datetime, timedelta
+from datetime import date, timedelta
+from src.utils.validation_utility import get_valid_input, validate_positive_int, CancelInput
 
-def generate_test_transactions() -> list[dict[str, any]]:
+def generate_test_transactions(transactions: list[dict[str, any]]) -> list[dict[str, any]]:
     """
     Create test financial transactions.
     Csv headers should be 'transaction_id', 'date', 'customer_id', 'amount', 'type', 'description'. In that order.
     Data types should be positive int, datetime.date in format YYYY-MM-DD, int, positive float,
       string in ('debit', 'credit', 'transfer'), string. In that order.
     """
-    transactions = []
+    print("Enter 'c' to cancel and go back to main menu.")
     while True:
         try:
             # Get number of transactions to create from user
-            number_of_transactions = input("How many test transactions would you like to generate? ").strip()
-            # Validate input
-            if not number_of_transactions.isdigit():
-                raise ValueError(f"You must generate a positive number of transactions")
-            number_of_transactions = int(number_of_transactions)
-            if number_of_transactions <=0:
-                raise ValueError("You must generate a positive number of transactions")
+            number_of_transactions = get_valid_input("How many test transactions would you like to generate? ", validate_positive_int)          
+            # If transactions already has data, clear it
+            transactions.clear()
             # Get date range for random creation
-            start_date = datetime(1989, 1, 1).date()
-            end_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day).date()
+            start_date = date(1989, 1, 1)
+            end_date = date.today()
             difference = end_date - start_date
-            # Create number of transactions with random data
+            # Create specified number of transactions with random data
             for i in range(number_of_transactions):
                 test_transaction = {
                     'transaction_id': i + 1,
@@ -35,6 +32,7 @@ def generate_test_transactions() -> list[dict[str, any]]:
                 test_transaction['description'] = f"Customer {test_transaction['customer_id']} logged a {test_transaction['type']} for {test_transaction['amount']}."
                 transactions.append(test_transaction)
             print("\nTest transactions generated!")
-            return transactions
-        except Exception as e:
+        # Catch user cancellation
+        except CancelInput as e:
             print(e)
+        return transactions

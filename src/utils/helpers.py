@@ -1,17 +1,17 @@
 import os
-from src.utils.validation_utility import validate_transaction_id
+from src.utils.validation_utility import get_valid_input, validate_transaction_id
 
 def get_transaction_id_to_modfy(transactions: list[dict[str, any]]) -> int:
     """ Prompt user for an id in transactions list and validates it. Returns Error or valid id. """
+    transaction_ids = []
+    # Gets all transaction ids in transactions
+    transaction_ids.extend(transaction['transaction_id'] for transaction in transactions)
+    min_id = min(transaction_ids) # Smallest id for user prompt
+    max_id = max(transaction_ids) # Lrgest id for user prompt
     while True:
-        try:
-            transaction_ids = []
-            # Gets all transaction ids in transactions
-            transaction_ids.extend(transaction['transaction_id'] for transaction in transactions)
-            min_id = min(transaction_ids) # Smallest id for user prompt
-            max_id = max(transaction_ids) # Lrgest id for user prompt
+        try:         
             # Prompts user for transaction id
-            modify_row_id = validate_transaction_id(input(f"Select transaction {min_id}-{max_id}: ").strip())
+            modify_row_id = get_valid_input(f"Select transaction {min_id}-{max_id}: ", validate_transaction_id)
             # Throw error if user input is not in transaction ids
             if modify_row_id not in transaction_ids:
                 raise ValueError("\nThe number you entered does not exist in transaction_ids\n")
@@ -19,7 +19,7 @@ def get_transaction_id_to_modfy(transactions: list[dict[str, any]]) -> int:
             return modify_row_id
         # Handle errors and prompt again             
         except ValueError as e:
-            print(f"\nYou must enter a valid transaction number, {e}\n")
+            print(e)
 
 def cleanup_old_files(original_filename: str, type_of_file: str) -> None:
     """

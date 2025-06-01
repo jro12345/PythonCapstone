@@ -1,23 +1,6 @@
 import src.utils.helpers as helpers
 import src.utils.table_formatting as formatting_helper
-
-def certainty_check(transaction: dict[str,any]) -> bool:
-    """
-    Prompts user for 'yes'/'no'.
-    Throws error and prompts again if input does not match one of those.
-    Returns True for 'yes' and False for 'no'.
-    """
-    while True:
-        try:
-            certain = input(f"Are you sure you want to delete transaction?\n{transaction}\nyes/no: ").strip().lower()
-            if certain not in ["yes", "no"]:
-                raise ValueError(f"You must enter yes or no, you entered {certain}")
-            if certain == "no":
-                print("\nMake up your mind.")
-                return False
-            return True
-        except ValueError as e:
-            print(e)
+from src.utils.validation_utility import get_valid_input, validate_yes_no, CancelInput
 
 def delete_transaction_by_id(transaction_id: int, transactions: list[dict[str, any]]) -> list[dict[str,any]]:
     """ Delete transaction by id.
@@ -28,20 +11,18 @@ def delete_transaction_by_id(transaction_id: int, transactions: list[dict[str, a
     deleted = False
     for i, transaction in enumerate(transactions):
         if transaction['transaction_id'] == transaction_id:
-            while True:
-                try:
-                    certain = input(f"Are you sure you want to delete transaction?\n{transaction}\nyes/no: ").strip().lower()
-                    if certain not in ['yes', 'no']:
-                        raise ValueError(f"You must enter yes or no, you entered {certain}")
-                    if certain == 'no':
-                        print("\nMake up your mind.")
-                        return transactions
-                    else:
-                        transactions.pop(i)
-                        deleted = True
-                        break
-                except ValueError as e:
-                    print(e)
+            try:
+                print(f"Are you sure you want to delete transaction?\n{transaction}")
+                certain = get_valid_input("yes/no: ", validate_yes_no)
+                if certain == 'no':
+                    print("\nMake up your mind.")
+                    return transactions
+                else:
+                    transactions.pop(i)
+                    deleted = True
+                    break
+            except ValueError as e:
+                print(e)
     if deleted:
         print("\nTransaction deleted!")
     else:
@@ -59,10 +40,15 @@ def delete_transaction(transactions: list[dict[str, any]]) -> list[dict[str, any
     """
     # Print numbered table view
     formatting_helper.numbered_transaction_table(transactions)
-    # Get transaction to delete from user by id
-    delete_id = helpers.get_transaction_id_to_modfy(transactions)
-    # Delete transaction with matching transaction id and return new transactions list
-    return delete_transaction_by_id(delete_id, transactions)
+    print("Enter 'c' at any step to cancel and go back to main menu")
+    try:
+        # Get transaction to delete from user by id
+        delete_id = helpers.get_transaction_id_to_modfy(transactions)
+        # Delete transaction with matching transaction id and return new transactions list
+        return delete_transaction_by_id(delete_id, transactions)
+    except CancelInput as e:
+        print(e)
+        return transactions
 
 
 

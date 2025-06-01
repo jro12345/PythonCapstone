@@ -1,5 +1,10 @@
 from datetime import datetime
 
+class CancelInput(Exception):
+    """ Custom exception to allow user to return to main menu. """
+    def __init__(self, message: str = "\nReturning to main menu..."):
+        super().__init__(message)
+
 def validate_transaction_id(value: any, previous_ids: list[any] = None) -> int:
     """ Validate value is a valid int > 0. """
     clean_value = value.strip()
@@ -37,7 +42,7 @@ def validate_amount(value: any) -> float:
         if amount <= 0:
             raise ValueError
         return round(amount, 2)
-    except (ValueError):
+    except ValueError:
         raise ValueError(f"\nInvalid transaction amount {value}: Transaction amount must be a positive number.\n")
     
 def validate_transaction_type(value: any) -> str:
@@ -48,14 +53,31 @@ def validate_transaction_type(value: any) -> str:
         raise ValueError(f"\nInvalid transaction type: '{value}'. Valid types are {valid_transaction_types}.\n")
     return type
 
-def get_valid_input(prompt: any, validate_func: callable) -> callable:
+def validate_positive_int(value: any) -> int:
+    try:
+        value = int(value)
+        if value <= 0:
+            raise ValueError
+        return value
+    except ValueError:
+        raise ValueError("\nYou must enter a positive whole number\n")
+
+def validate_yes_no(value: any) -> str:
+    if value not in ['yes', 'no']:
+        raise ValueError(f"\nYou must enter yes or no, you entered {value}\n")
+    return value
+
+def get_valid_input(prompt: str, validate_func: callable) -> type:
     """ Generate user input promt and validate the input. """
     while True:
         try:
             # Prompt generated based on calling function parameter
-            user_input = input(prompt).strip()
+            user_input = input(prompt).strip().lower()
             if not user_input:
                 raise ValueError("\nInput cannot be empty\n")
+            # Raise custom exception to allow calling method to catch and return to main menu
+            if user_input == 'c':
+                raise CancelInput
             # Return validation function based on calling function parameter
             return validate_func(user_input)
         except ValueError as e:

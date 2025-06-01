@@ -1,3 +1,11 @@
+from src.utils.validation_utility import *
+
+class NoTransactionsToDisplayError(Exception):
+    """ Custom exception for when certain transactions types do not exist in file. """
+    def __init__(self, transaction_type: str):
+        message = f"\nThere are no {transaction_type} transactions in this file"
+        super().__init__(message)
+
 def format_transactions_table(transactions: list[dict[str, any]]) -> str:
     """
     Prints transactions with columns names.
@@ -42,26 +50,21 @@ def format_transactions_table(transactions: list[dict[str, any]]) -> str:
         separator,
         *rows
     ])
-
     return table
 
 def view_transactions_by_type(transactions: list[dict[str, any]]) -> None:
     """ Filter transactions by type and print in formatted view. """
     while True:
-        try:
-            # Get type filter from user
-            type_to_view = input("Which type of transaction would you like to view?\n(debit/credit/transfer): ").strip().lower()
-            if type_to_view not in ['debit', 'credit', 'transfer']:
-                raise ValueError(f"\nType can only be 'debit', 'credit', or 'transfer', you chose {type_to_view}\n")
-            # Filter transactions
-            filtered_transactions = [txn for txn in transactions if txn['type'] == type_to_view]
-            if not filtered_transactions:
-                raise ValueError(f"\nThere were no {type_to_view} transactions in this file\n")
-            # Print table in formatted view
-            print('\n', format_transactions_table(filtered_transactions))
-            break
-        except ValueError as e:
-            print(e)
+        # Get type to filter on
+        type_to_view = get_valid_input("Which type of transaction would you like to view?\n(debit/credit/transfer): ", validate_transaction_type)
+        # Filter transactions by specified type
+        filtered_transactions = [txn for txn in transactions if txn['type'] == type_to_view]
+        # If no transactions for specified type, raise error
+        if not filtered_transactions:
+            raise NoTransactionsToDisplayError(type_to_view)
+        # Print table in formatted view
+        print('\n', format_transactions_table(filtered_transactions))
+        return
 
 def view_transactions(transactions: list[dict[str, any]]) -> None:
     """
@@ -70,17 +73,22 @@ def view_transactions(transactions: list[dict[str, any]]) -> None:
     """
     while True:
         try:
+            print("Enter 'c' to cancel and go back to main menu")
             # Prompt user for how to filter transactions
-            view_by_type = input("Do you want to view transactions by a certain type?\n('yes' to filter 'no' to view all): ").strip().lower()
-            if view_by_type not in ['yes', 'no']:
-                raise ValueError(f"\nYou must enter yes or no, you entered {view_by_type}\n")
+            view_by_type = get_valid_input("Do you want to view transactions by a certain type?\n('yes' to filter 'no' to view all): ", validate_yes_no)
             # Print all transactions
-            elif view_by_type == 'no':
+            if view_by_type == 'no':
                 print('\n', format_transactions_table(transactions))
                 break
             # Print only specific types of transactions
-            elif view_by_type == 'yes':
+            if view_by_type == 'yes':
                 view_transactions_by_type(transactions)
-                return                
-        except ValueError as e:
+                break 
+        # Catch case where no transactions to display by type. Reprompt user to view transations
+        except NoTransactionsToDisplayError as e:
+            print(f"{e}\nPlease try another type or view all transactions\n")
+            continue               
+        # Catch user cancellelation
+        except CancelInput as e:
             print(e)
+            return

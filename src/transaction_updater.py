@@ -1,5 +1,5 @@
-import src.utils.helpers as helpers
-import src.utils.validation_utility as validation_utility
+from src.utils.helpers import get_transaction_id_to_modfy
+from src.utils.validation_utility import *
 from src.utils.table_formatting import numbered_transaction_table
 
 def get_field_to_update() -> str:
@@ -11,6 +11,8 @@ def get_field_to_update() -> str:
     while True:
         try:
             update_field = input("Change which field? (description, type, amount): ").strip().lower()
+            if update_field == 'c':
+                raise CancelInput
             if update_field not in valid_fields:
                 raise ValueError(f"\nYou did not enter a valid field: '{update_field}'. The fields you can update are: {valid_fields}.\n")
             return update_field
@@ -25,18 +27,17 @@ def get_updated_field_value(update_field: str) -> any:
     If invalid field is entered, throws error and prompts again. """
     while True:
         try:
-            updated_value = input(f"New {update_field}: ").strip()
+            updated_value = input(f"New {update_field}: ")
             # If 'description', return. 'description' can be any value.
+            if updated_value == 'c':
+                raise CancelInput
             if update_field == "description":
                 pass
             # Call validation functions based on update_field
             elif update_field == "type":
-                updated_value = validation_utility.validate_transaction_type(updated_value)              
+                updated_value = validate_transaction_type(updated_value)              
             elif update_field == "amount":
-                updated_value = validation_utility.validate_amount(updated_value)
-            # Handle edge case where 'update_field' is not in updatable fields
-            else:
-                raise ValueError(f"\nYou shouldn't be here. You cannot change this field!\n")
+                updated_value = validate_amount(updated_value)
             return updated_value
         except ValueError as e:
             print(e)
@@ -72,12 +73,17 @@ def update_transactions(transactions: list[dict[str, any]]) -> list[dict[str, an
         """
         # Print numbered table view
         numbered_transaction_table(transactions)
+        print("Enter 'c' at any step to cancel and go back to main menu")
         # Get transaction to delete from user by id
-        transaction_id = helpers.get_transaction_id_to_modfy(transactions)
-        # Get field to update from user
-        update_field = get_field_to_update()
-        # Get new value for field to update from user
-        updated_value = get_updated_field_value(update_field)
-        # Modify update field value in transaction with matching id and return new transactions list
-        return update_transaction_by_id(transaction_id, update_field, updated_value, transactions)
+        try:
+            transaction_id = get_transaction_id_to_modfy(transactions)
+            # Get field to update from user
+            update_field = get_field_to_update()
+            # Get new value for field to update from user
+            updated_value = get_updated_field_value(update_field)
+            # Modify update field value in transaction with matching id and return new transactions list
+            return update_transaction_by_id(transaction_id, update_field, updated_value, transactions)
+        except CancelInput as e:
+            print(e)
+            return transactions
     
