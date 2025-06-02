@@ -33,7 +33,7 @@ transaction_id: Unique ID consisting of positive ints
 date: YYYY-MM-DD format  
 customer_id: positive int  
 amount:  positive float (debits will be made negative programmatically)  
-type: (debit, credit, or transfer)'
+type: (debit, credit, or transfer)
 description: string description of the transaction
 ## Features
  - Generate Test Transaction Data: Load randomized data in valid format.
@@ -42,7 +42,7 @@ description: string description of the transaction
  - View Transactions: Prints all transaction data in a formatted table. Can view all or by year.
  - Update Transactions: Select a transaction to update and then update a specified field. All inputs are validated programmatically to preserve data integrity.
  - Delete Transactions: Delete a specified transaction from working list.
- - Analyze Transactions: Transactional data can be anayled as a whole or by specified year. Debits, Credits, and Transfers are individually summed and Net Balance is calculated.
+ - Analyze Transactions: Transactional data can be analyzed as a whole or by specified year. Debits, Credits, and Transfers are individually summed and Net Balance is calculated.
  - Save Transactions: After manipulating transactional data, the working list can be saved to the original csv. Randomized test data can also be saved to this file. A backup file of original transactions is created to prevent accidental data loss. All old backup files are deleted.
  - Generate Report: A text file report is generated with a date stamp to promote clarity. Each new report will replace the old one. This feature can be turned off with a one-liner in case user wants to save old reports. Reports will include date range of transactions, a financial summary, percentage of transactions types against the total of transactions, a printout of the customers with the highest transactions per type (as well as the number associated), transaction totals by customer id, and finally the transactions sorted by date.
 ## Useage
@@ -50,7 +50,7 @@ description: string description of the transaction
  - 'ctrl+c' can be entered at any time to gracefully exit the program.
  - 'c' can be entered during any user prompt to exit back to Main Menu.  
 0. Generate Test Transactions:
-   - Generates a random set up data in valid structure.
+   - Generates a random set of data in valid structure.
    - Prompts for number of transactions to be generated.
    - This will clear any previously loaded transactions.    
 1. Load Transactions:
@@ -65,7 +65,7 @@ description: string description of the transaction
    - Transaction is appended to working list.   
 3. View Transactions:
    - Prompts to view transactions.
-   - transactions can be viewed all at once or by a specific type ex: debit, credit, transfer.
+   - Transactions can be viewed all at once or by a specific type ex: debit, credit, transfer.
    - Transactions will be printed to console in a formatted table.   
 4. Update Transaction:
     - Displays transactions in a numbered list and prompts to select one to update.
@@ -89,7 +89,7 @@ description: string description of the transaction
    - Report will include
      - Date range of transactions
      - Financial summary
-     - Percentage of transactions types against the total of transactions
+     - Percentage of transaction types against the total of transactions
      - Printout of the customers with the highest transactions per type (as well as the number associated)
      - Transaction totals by customer id
      - Transactions sorted by date.
