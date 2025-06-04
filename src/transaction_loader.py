@@ -41,7 +41,7 @@ def load_transactions(filename: str='financial_transactions.csv') -> list[dict[s
                 reader = csv.DictReader(csv_file)
             # If invalid headers used, try to load all rows as data
             else:
-                print("No valid headers found, first row of file will be treated as data.")
+                print(f"No valid headers found, first row of file will be treated as data.\n")
                 reader = csv.DictReader(csv_file, fieldnames=expected_headers)
             for line in reader:
                 try:
@@ -70,7 +70,7 @@ def load_transactions(filename: str='financial_transactions.csv') -> list[dict[s
         if len(transactions) != 0:
             print(f"\n{transaction_counter} transactions loaded!")
         else:
-            print("\nFile loaded but transactions list is empty!")
+            print("File loaded but transactions list is empty!")
         return transactions
     except FileNotFoundError:
         log_error(f"\n{filename} was not found. Please upload file and try again.\n")

@@ -1,14 +1,21 @@
 transaction_id,date,customer_id,amount,type,description
-2,2003-10-29,339,891936.83,transfer,Customer 339 logged a transfer for 891936.83.
-3,2012-11-21,738,8580984.01,transfer,Customer 738 logged a transfer for 8580984.01.
-4,2002-02-03,149,9851012.58,transfer,Customer 149 logged a transfer for 9851012.58.
-5,2019-12-07,734,9588801.39,credit,Customer 734 logged a credit for 9588801.39.
-6,2021-04-13,408,1268561.43,credit,Customer 408 logged a credit for 1268561.43.
-8,1998-09-14,182,6712125.85,credit,Customer 182 logged a credit for 6712125.85.
-9,2025-02-03,968,2919411.10,transfer,Customer 968 logged a transfer for 2919411.1.
-10,2017-01-03,208,4001869.43,transfer,Customer 208 logged a transfer for 4001869.43.
-13,2025-02-14,53,8586241.00,credit,Customer 53 logged a credit for 8586241.0.
-14,2007-12-06,875,7312146.26,transfer,Customer 875 logged a transfer for 7312146.26.
-16,2012-01-30,263,987023.89,transfer,Customer 263 logged a transfer for 987023.89.
-18,2004-10-25,799,4951060.79,transfer,Customer 799 logged a transfer for 4951060.79.
-19,1997-04-30,296,4124367.69,credit,Customer 296 logged a credit for 4124367.69.
+1,2020-10-26,926,6478.39,credit,Expect series shake art again our.
+2,2020-01-08,466,1255.95,credit,Each left similar likely coach take.
+3,2019-09-02,110,7969.68,debit,Direction wife job pull determine leader move college.
+4,2020-12-02,142,2927.41,credit,Agree reveal buy black already.
+5,2020-12-02,944,4661.88,debit,Child relationship show college whom speech.
+6,2021-04-25,900,3649.68,credit,Century front item.
+7,2020-06-19,458,504.24,credit,Market cover loss hotel send.
+8,2022-09-08,573,8088.01,credit,Trouble reason speak involve.
+9,2022-01-30,950,3006.30,credit,Popular three war arm best.
+10,2020-08-20,728,1008.62,credit,Old see watch no.
+11,2019-12-09,908,4615.87,debit,Million explain rule boy agree can.
+12,2019-01-18,585,405.19,debit,Us save attention interest country short.
+13,2018-04-15,227,5938.56,credit,Media organization structure their cut not where few.
+14,2019-06-06,565,-3516.95,debit,Available smile make star majority.
+15,2022-01-17,818,9454.59,credit,Fund house head course around strategy lead.
+16,2020-12-08,751,3415.26,credit,Main few character air.
+17,2021-06-05,658,9751.08,transfer,Listen operation enough those society open.
+18,2022-05-23,296,1676.77,transfer,Property strategy represent that.
+19,2020-01-25,681,5159.90,debit,Soldier green age much sound write chair.
+20,2020-02-19,33,6018.28,debit,What single suggest now stop.
