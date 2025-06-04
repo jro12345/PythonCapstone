@@ -20,7 +20,7 @@ def get_sums_by_type(transactions: list[dict[str, any]]) -> dict:
         sums_by_type[transaction['type']] += abs_amount
     return sums_by_type
 
-def analyze_transactions_by_year(transactions: list[dict[str, any]]) -> list[dict[str, any]]:
+def analyze_transactions_by_year(transactions: list[dict[str, any]]) -> tuple[str, list[dict[str, any]]]:
     """
     Ask user if they want to analyze transactions by year.
     If no, return orginal transaction list.
@@ -28,8 +28,9 @@ def analyze_transactions_by_year(transactions: list[dict[str, any]]) -> list[dic
     """
     print("Enter 'c' at any step to cancel and go back to main menu")
     specify_year = get_valid_input("Do you want to analyze transactions for a specific year (yes/no?: ", validate_yes_no)
+    # Return all transactions
     if specify_year == "no":
-        return 'All', transactions
+        return ('All', transactions)
     else:
         # Get list of all years in transactions
         valid_years = {int(datetime.strftime(txn['date'], "%Y")) for txn in transactions}
@@ -42,9 +43,9 @@ def analyze_transactions_by_year(transactions: list[dict[str, any]]) -> list[dic
                 print(f"\nYou must select a valid year from {sorted(valid_years)}\n")
             else:
                 # Return only transactions for the year specified
-                return year_input, [txn for txn in transactions if txn['date'].year == int(year_input)]
+                return (year_input, [txn for txn in transactions if txn['date'].year == int(year_input)])
                 
-def create_report_statement(year: str, transactions: list[dict[str, any]]) -> str:
+def create_report_statement(transactions: list[dict[str, any]], year: str = 'All') -> str:
     """ Creates a string statements formatted with totals based on transaction type """
     # Sum the totals
     sums = get_sums_by_type(transactions)
@@ -164,8 +165,8 @@ def analyze_finances(transactions: list[dict[str, any]], filename: str = 'analys
     Writes analysis to file.
     """
     try:
-        year, transactions_by_year = analyze_transactions_by_year(transactions)
-        analysis = create_report_statement(year, transactions_by_year)
+        (year, transactions_by_year) = analyze_transactions_by_year(transactions)
+        analysis = create_report_statement(transactions_by_year, year)
         print(analysis)
         try:
             with open(filename, 'w', encoding='utf-8') as analysis_file:
@@ -183,7 +184,7 @@ def generate_report(transactions: list[dict[str, any]], filename: str ='report.t
             'FINANCIAL ANALYSIS REPORT',
             f'Report contains dates from {get_transaction_date_range(transactions)}',
             '*' * 40,
-            create_report_statement('All', transactions),
+            create_report_statement(transactions),
             '*' * 40,
             'Percentage of total by type:',
             calculate_percentage_of_type_totals(transactions),
